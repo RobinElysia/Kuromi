@@ -1,0 +1,77 @@
+services:
+  kuromi-redis:
+    image: redis:7.4-alpine
+    container_name: kuromi-redis
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --requirepass
+      - ${KUROMI_REDIS_PASSWORD:-000745012010psQ}
+      - --appendonly
+      - "yes"
+      - --appendfsync
+      - everysec
+      - --save
+      - "60 1000"
+      - --bind
+      - 0.0.0.0
+    ports:
+      - "6379:6379"
+    volumes:
+      - kuromi-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${KUROMI_REDIS_PASSWORD:-000745012010psQ}", "PING"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  kuromi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kuromi-app
+    restart: unless-stopped
+    depends_on:
+      kuromi-redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      KUROMI_REDIS_URL: redis://:${KUROMI_REDIS_PASSWORD:-000745012010psQ}@kuromi-redis:6379
+      KUROMI_ALLOWED_ORIGINS: ${KUROMI_ALLOWED_ORIGINS:-http://localhost,https://localhost}
+      KUROMI_ADMIN_ROBIN_BOOTSTRAP_SECRET: ${KUROMI_ADMIN_ROBIN_BOOTSTRAP_SECRET:-000745012010psQ}
+      KUROMI_ADMIN_MEOW_BOOTSTRAP_SECRET: ${KUROMI_ADMIN_MEOW_BOOTSTRAP_SECRET:-030101wbb}
+    expose:
+      - "3000"
+    volumes:
+      - kuromi-uploads-data:/app/public/uploads
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then((res) => process.exit(res.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  kuromi-proxy:
+    image: caddy:2.8-alpine
+    container_name: kuromi-proxy
+    restart: unless-stopped
+    depends_on:
+      kuromi-app:
+        condition: service_healthy
+    environment:
+      KUROMI_SITE_HOST: ${KUROMI_SITE_HOST:-localhost}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - kuromi-caddy-data:/data
+      - kuromi-caddy-config:/config
+
+volumes:
+  kuromi-redis-data:
+  kuromi-uploads-data:
+  kuromi-caddy-data:
+  kuromi-caddy-config:

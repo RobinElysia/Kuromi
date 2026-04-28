@@ -1,0 +1,312 @@
+﻿@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+@import "bytemd/dist/index.css";
+@import "github-markdown-css/github-markdown.css";
+@import "highlight.js/styles/github-dark.css";
+
+@font-face {
+  font-family: "KuromiDisplay";
+  src: url("./public/front/Kuromi_style_font.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KuromiCursive";
+  src: url("./public/front/cursive_font.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KuromiSans";
+  src: url("./public/front/normal.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KuromiChinese";
+  src: url("./public/front/chinese_front.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --font-display: "KuromiDisplay", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-body: "KuromiChinese", "KuromiSans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-script: "KuromiCursive", "KaiTi", cursive;
+  --md-bg: rgba(2, 6, 23, 0.86);
+  --md-border: rgba(226, 232, 240, 0.14);
+  --md-text: rgba(248, 250, 252, 0.95);
+  --md-muted: rgba(148, 163, 184, 0.86);
+  --md-kuromi-surface: linear-gradient(165deg, rgba(30, 41, 59, 0.56), rgba(20, 24, 42, 0.52) 48%, rgba(49, 46, 129, 0.32));
+  --md-kuromi-border: rgba(244, 114, 182, 0.22);
+  --md-kuromi-link: rgb(167 243 208);
+  --md-kuromi-link-hover: rgb(253 224 71);
+}
+
+html,
+body,
+#root {
+  font-family: var(--font-body);
+  min-height: 100%;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+.font-kuromi-script {
+  font-family: var(--font-script);
+}
+
+@keyframes acrylicPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 12px rgba(255, 255, 255, 0.35),
+      0 0 30px rgba(248, 113, 185, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(255, 255, 255, 0.46),
+      0 0 38px rgba(34, 211, 238, 0.48);
+  }
+}
+
+.acrylic-dot {
+  animation: acrylicPulse 1.8s ease-in-out infinite;
+}
+
+.bytemd {
+  min-height: 72vh;
+  border: 0;
+  background: transparent;
+  color: var(--md-text);
+}
+
+.bytemd-toolbar {
+  border-bottom: 1px solid var(--md-border);
+  background: rgba(15, 23, 42, 0.65);
+}
+
+.bytemd-toolbar-icon {
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.bytemd-body {
+  min-height: 66vh;
+}
+
+.bytemd-editor,
+.bytemd-preview,
+.bytemd-preview .markdown-body {
+  background: var(--md-bg);
+  color: var(--md-text);
+}
+
+.bytemd-split .bytemd-preview,
+.bytemd-preview {
+  border-left-color: var(--md-border);
+}
+
+.bytemd .CodeMirror,
+.bytemd .CodeMirror-gutters {
+  background: transparent;
+}
+
+.bytemd .CodeMirror-lines {
+  color: var(--md-text);
+}
+
+.bytemd .CodeMirror-cursor {
+  border-left-color: rgba(248, 250, 252, 0.9);
+}
+
+.bytemd .CodeMirror-guttermarker-subtle,
+.bytemd .CodeMirror-linenumber {
+  color: var(--md-muted);
+}
+
+.bytemd .markdown-body {
+  --color-canvas-default: transparent;
+  --color-fg-default: rgba(248, 250, 252, 0.95);
+  --color-border-default: rgba(226, 232, 240, 0.16);
+  --color-accent-fg: rgb(165 243 252);
+  --color-neutral-muted: rgba(15, 23, 42, 0.7);
+  color: var(--md-text);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.bytemd .markdown-body h1,
+.bytemd .markdown-body h2,
+.bytemd .markdown-body h3,
+.bytemd .markdown-body h4,
+.bytemd .markdown-body h5,
+.bytemd .markdown-body h6 {
+  color: rgba(248, 250, 252, 0.98);
+  line-height: 1.35;
+  margin-top: 1.3em;
+  margin-bottom: 0.55em;
+  font-weight: 700;
+}
+
+.bytemd .markdown-body p,
+.bytemd .markdown-body ul,
+.bytemd .markdown-body ol,
+.bytemd .markdown-body blockquote,
+.bytemd .markdown-body table,
+.bytemd .markdown-body pre {
+  margin-top: 0.85em;
+  margin-bottom: 0.85em;
+}
+
+.bytemd .markdown-body ul {
+  list-style: disc;
+  list-style-position: inside;
+  padding-left: 1.5rem;
+}
+
+.bytemd .markdown-body ol {
+  list-style: decimal;
+  list-style-position: inside;
+  padding-left: 1.6rem;
+}
+
+.bytemd .markdown-body li {
+  margin: 0.3em 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.bytemd .markdown-body li::marker {
+  color: rgba(196, 181, 253, 0.95);
+}
+
+.bytemd .markdown-body li > ul,
+.bytemd .markdown-body li > ol {
+  margin-top: 0.35em;
+  margin-bottom: 0.35em;
+}
+
+.bytemd .markdown-body pre {
+  border: 1px solid var(--md-border);
+  background: rgba(2, 6, 23, 0.85);
+  border-radius: 0.75rem;
+}
+
+.bytemd .markdown-body code {
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 0.45rem;
+  padding: 0.1rem 0.35rem;
+}
+
+.bytemd .markdown-body blockquote {
+  color: rgba(226, 232, 240, 0.85);
+  border-left-color: rgba(34, 211, 238, 0.55);
+}
+
+.bytemd .markdown-body hr {
+  border-bottom-color: var(--md-border);
+}
+
+.kuromi-markdown .bytemd {
+  min-height: auto;
+  height: auto;
+  overflow: visible;
+}
+
+.kuromi-markdown .bytemd-toolbar {
+  display: none;
+}
+
+.kuromi-markdown .bytemd-body {
+  min-height: auto;
+  height: auto;
+  overflow: visible;
+}
+
+.kuromi-markdown .bytemd-preview {
+  border-left: 0;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  overflow: visible;
+}
+
+.kuromi-markdown .markdown-body {
+  background: var(--md-kuromi-surface);
+  border: 1px solid var(--md-kuromi-border);
+  border-radius: 0.95rem;
+  box-sizing: border-box;
+  width: 65%;
+  max-width: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 42px rgba(12, 18, 34, 0.36);
+  padding: 1.1rem 1.2rem;
+}
+
+.post-detail-markdown.kuromi-markdown .markdown-body {
+  width: 100%;
+  max-width: none;
+}
+
+.kuromi-markdown .markdown-body p,
+.kuromi-markdown .markdown-body li,
+.kuromi-markdown .markdown-body blockquote,
+.kuromi-markdown .markdown-body td,
+.kuromi-markdown .markdown-body th {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.kuromi-markdown .markdown-body a {
+  word-break: break-all;
+}
+
+.kuromi-markdown .markdown-body pre {
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.kuromi-markdown .markdown-body a {
+  color: var(--md-kuromi-link);
+  text-decoration-color: rgba(167, 243, 208, 0.55);
+  text-underline-offset: 2px;
+}
+
+.kuromi-markdown .markdown-body a:hover {
+  color: var(--md-kuromi-link-hover);
+  text-decoration-color: rgba(253, 224, 71, 0.65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acrylic-dot {
+    animation: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .kuromi-markdown .markdown-body {
+    width: 100%;
+  }
+}

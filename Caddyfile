@@ -1,0 +1,9 @@
+http://{$KUROMI_SITE_HOST:localhost} {
+  encode zstd gzip
+  reverse_proxy kuromi-app:3000
+}
+
+https://{$KUROMI_SITE_HOST:localhost} {
+  encode zstd gzip
+  reverse_proxy kuromi-app:3000
+}

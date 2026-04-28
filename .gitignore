@@ -1,0 +1,12 @@
+node_modules/
+build/
+.agents/
+.agents/skills/
+.claude/skills/
+.vscode/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+require.md
