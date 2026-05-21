@@ -32,6 +32,9 @@
   --font-display: "KuromiDisplay", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-body: "KuromiChinese", "KuromiSans", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-script: "KuromiCursive", "KaiTi", cursive;
+  color-scheme: dark;
+  --app-bg: #020617;
+  --app-text: rgba(248, 250, 252, 0.96);
   --md-bg: rgba(2, 6, 23, 0.86);
   --md-border: rgba(226, 232, 240, 0.14);
   --md-text: rgba(248, 250, 252, 0.95);
@@ -49,7 +52,13 @@ body,
   min-height: 100%;
 }
 
+html {
+  background-color: var(--app-bg);
+}
+
 body {
+  background-color: var(--app-bg);
+  color: var(--app-text);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,6 +68,7 @@ button,
 input,
 textarea,
 select {
+  color: inherit;
   font-family: inherit;
 }
 
