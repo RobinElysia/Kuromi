@@ -36,7 +36,7 @@ export default function EasterEggModal({ isOpen, onClose }: EasterEggModalProps)
 
                 <h2 className="mb-4 bg-gradient-to-r from-rose-200 via-orange-100 to-cyan-100 bg-clip-text text-2xl font-bold text-transparent">惊喜彩蛋</h2>
 
-                <p className="text-lg font-medium leading-relaxed text-rose-100">我喜欢你，比昨天多一点，比明天少一点。但我希望你每天开心，因为我不想让我喜欢的人因为一些小时闷闷不乐</p>
+                <p className="text-lg font-medium leading-relaxed text-rose-100">我喜欢你，比昨天多一点，比明天少一点。但我希望你每天开心，因为我不想让我喜欢的人因为一些小事闷闷不乐</p>
 
                 <Button type="button" onClick={onClose} variant="ghost" className="mt-7 w-full border-slate-100/20">
                   关闭
